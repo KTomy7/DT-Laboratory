@@ -5,16 +5,35 @@ var app = new Vue({
         encodedBits: [],
         status: '',
         numberOfBits: 8,
-        validateBit: validateBit
+        validateBit: validateBit,
+        encodeType: "",
     },
     created: function () {
         this.bits = getBitstream(this.numberOfBits);
     },
     methods: {
         encode: function(){
-            this.encodedBits = getManchesterLevelEncoding(this.bits);
+            this.encodeType = "BL"
+            switch(this.encodeType.toString()){
+                case 'manchester-level':
+                    this.encodedBits = getManchesterLevelEncoding(this.bits);
+                    break;
+                case 'NRZ-L':
+                     this.encodedBits = nonReturnToZeroLevel(this.bits);
+                     break;
+                case 'NRZ-M':
+                    this.encodedBits = nonReturnToZeroMark(this.bits);
+                    break;
+                case 'NRZ-S':
+                    this.encodedBits = nonReturnToZeroSpace(this.bits);
+                    break;
+                case 'RZ':
+                    this.encodedBits = returnToZero(this.bits);
+                    break;
+                case 'BL':
+                    this.encodedBits = byphaseLevel(this.bits);
+                    break;
         }
     }
-})
-
-console.log('🍓🥑🍏☕🏆⚽✅🚦');
+}
+});

@@ -5,6 +5,13 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+    <div id="encode-type">
+        <label for="encode-type">Encoding type:</label>
+        <select v-model="encodeType" v-on:change="encode()">
+          <option value="NRZ-L">NRZL</option>
+          <option value="NRZ-M">NRZM</option>
+        </select>
+    </div>      
     <div id="baseband-encoder">
         <ul v-for="(bit, index) in bits">
             <li>
